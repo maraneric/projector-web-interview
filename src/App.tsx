@@ -1,5 +1,6 @@
-import React from 'react'
-import './App.css'
+import React from "react";
+import "./App.css";
+import IssueViewer from "./components/IssueViewer";
 
 function App() {
   return (
@@ -7,8 +8,9 @@ function App() {
       <header>
         <h1>Github Issue Viewer</h1>
       </header>
+      <IssueViewer />
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
