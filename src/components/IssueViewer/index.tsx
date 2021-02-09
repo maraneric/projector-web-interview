@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./IssueViewer.css";
 import useGetIssues from "./useGetIssues";
+import IssueRow from "../IssueRow";
 
 function IssuesList() {
   const [org, setOrg] = useState("");
@@ -13,6 +14,7 @@ function IssuesList() {
         placeholder="org"
         value={org}
         onChange={(e) => setOrg(e.target.value)}
+        autoFocus={true}
       />
       <input
         placeholder="repo"
@@ -22,7 +24,13 @@ function IssuesList() {
       <button disabled={loading || !org || !repo} onClick={() => getIssues()}>
         Go
       </button>
-      {issues && issues.map((issue) => <div key={issue.id}>{issue.url}</div>)}
+      {issues.length ? (
+        <div className="IssueViewer-list">
+          {issues.map((issue) => (
+            <IssueRow key={issue.id} issue={issue} />
+          ))}
+        </div>
+      ) : null}
     </div>
   );
 }

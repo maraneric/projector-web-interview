@@ -1,1 +1,14 @@
+.IssueViewer {
+  margin: 0 auto;
+  max-width: 600px;
+}
 
+.IssueViewer-list {
+  margin: 20px 0;
+  border: solid 1px gray;
+  border-radius: 10px;
+  background-color: white;
+  box-shadow: 0 8px 6px -6px gray;
+  background-clip: padding-box;
+  overflow: hidden;
+}

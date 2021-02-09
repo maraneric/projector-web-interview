@@ -1,0 +1,25 @@
+.IssueRow {
+  display: flex;
+  align-items: center;
+  text-align: left;
+  padding: 8px;
+  cursor: pointer;
+}
+
+.IssueRow:not(:last-of-type) {
+  border-bottom: 1px solid grey;
+}
+
+.IssueRow:hover {
+  background-color: lightcyan;
+}
+
+.IssueRow-details {
+  /* We need the overflow: hidden here to ensure the title will truncate with ellipses */
+  overflow: hidden;
+  margin-left: 8px;
+}
+
+.IssueRow-title {
+  font-weight: 800;
+}
