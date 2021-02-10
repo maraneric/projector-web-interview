@@ -1,0 +1,20 @@
+.PageLink {
+  cursor: pointer;
+  border: none;
+  font-size: 16px;
+  color: #3369ff;
+}
+
+.PageLink:hover {
+  color: #3633ff;
+}
+
+.PageLink:focus {
+  color: #3633ff;
+  outline: none;
+}
+
+.PageLink:disabled {
+  color: grey;
+  cursor: default;
+}

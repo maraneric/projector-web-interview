@@ -5,7 +5,8 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #f0f0f0;
+  background-color: #f0efee;
+  color: #333;
 }
 
 code {
@@ -25,20 +26,32 @@ input {
   border: none;
   border-radius: 4px;
   padding: 4px 8px;
-  margin-right: 16px;
+  color: #333;
 }
 
-button {
+button.button {
   font-size: 18px;
   background-color: #3369ff;
   color: white;
   border: none;
   cursor: pointer;
-  padding: 4px 8px;
+  padding: 4px 16px;
   border-radius: 4px;
 }
 
-button:disabled {
+button.button:hover {
+  background-color: #3633ff;
+}
+
+button.error {
+  background-color: #f06060;
+}
+
+button.error:hover {
+  background-color: #f73636;
+}
+
+button.button:disabled {
   cursor: not-allowed;
   background-color: lightslategrey;
 }
