@@ -34,7 +34,11 @@ function IssueViewer() {
         onOrgChanged={setOrg}
         repo={repo}
         onRepoChanged={setRepo}
-        onGo={() => getIssues({ org, repo, page, pageSize })}
+        onGo={() => {
+          if (!loading && org && repo) {
+            getIssues({ org, repo, page, pageSize });
+          }
+        }}
         onClear={() => {
           clear();
           setOrg("");
@@ -45,6 +49,8 @@ function IssueViewer() {
 
       {error ? (
         <p>{error}</p>
+      ) : loading ? (
+        <p>loading...</p>
       ) : issues ? (
         issues.length ? (
           <>

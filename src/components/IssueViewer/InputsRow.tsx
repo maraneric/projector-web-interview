@@ -23,12 +23,22 @@ const InputsRow = ({
       placeholder="Org name"
       value={org}
       onChange={(e) => onOrgChanged(e.target.value)}
+      onKeyDown={(e) => {
+        if (e.key === "Enter") {
+          onGo();
+        }
+      }}
       autoFocus={true}
     />
     <input
       placeholder="Repo name"
       value={repo}
       onChange={(e) => onRepoChanged(e.target.value)}
+      onKeyDown={(e) => {
+        if (e.key === "Enter") {
+          onGo();
+        }
+      }}
     />
     <div className="IssueViewer-buttons">
       <button

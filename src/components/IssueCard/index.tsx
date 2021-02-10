@@ -4,6 +4,9 @@ import "./IssueCard.css";
 import { format, parseISO } from "date-fns";
 import Label from "./Label";
 
+const formatDate = (date: string) =>
+  format(parseISO(date), "MM/dd/yyyy h:mm:ss a");
+
 const IssueCard = ({
   issue,
   onClose,
@@ -25,9 +28,9 @@ const IssueCard = ({
         <small>[{issue.author_association}]</small>
       </dd>
       <dt>Opened at:</dt>
-      <dd>{format(parseISO(issue.created_at), "MM/dd/yyyy h:mm:ss a")}</dd>
+      <dd>{formatDate(issue.created_at)}</dd>
       <dt>Updated at:</dt>
-      <dd>{format(parseISO(issue.updated_at), "MM/dd/yyyy h:mm:ss a")}</dd>
+      <dd>{formatDate(issue.updated_at)}</dd>
       {issue.labels.length ? (
         <>
           <dt>Labels:</dt>
