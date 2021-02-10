@@ -2,7 +2,7 @@ import React from "react";
 import Issue from "../../types/Issue";
 import "./IssueCard.css";
 import { format, parseISO } from "date-fns";
-import Label from "./Label";
+import Label from "../Label";
 
 const formatDate = (date: string) =>
   format(parseISO(date), "MM/dd/yyyy h:mm:ss a");

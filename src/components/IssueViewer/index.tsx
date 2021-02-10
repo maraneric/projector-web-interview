@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import useGetIssues from "./useGetIssues";
-import IssueRow from "../IssueRow";
+import IssueList from "../IssueList";
 import Pagination from "../Pagination";
 import Issue from "../../types/Issue";
-import InputsRow from "./InputsRow";
+import InputsRow from "../InputsRow";
 import IssueCard from "../IssueCard";
 
 function IssueViewer() {
@@ -21,6 +21,9 @@ function IssueViewer() {
     numberOfPages,
   } = useGetIssues();
 
+  // Since this is an extremely simple app, I'm just saving the selected issue on the
+  // main IssueViewer component. If an issue is selected, show just that issue. If not,
+  // then show the inputs, issue list, and pagination controls.
   if (selectedIssue) {
     return (
       <IssueCard issue={selectedIssue} onClose={() => setSelectedIssue(null)} />
@@ -54,15 +57,7 @@ function IssueViewer() {
       ) : issues ? (
         issues.length ? (
           <>
-            <div className="Card">
-              {issues.map((issue) => (
-                <IssueRow
-                  key={issue.id}
-                  issue={issue}
-                  onSelect={() => setSelectedIssue(issue)}
-                />
-              ))}
-            </div>
+            <IssueList issues={issues} onSelectIssue={setSelectedIssue} />
             <Pagination
               currentPage={page}
               numberOfPages={numberOfPages}
