@@ -6,7 +6,7 @@ import Issue from "../../types/Issue";
 const linkHeaderRx = /page=(\d+)&per_page=\d+>;\s+rel="last"/;
 
 const useGetIssues = () => {
-  const [issues, setIssues] = useState<Issue[]>([]);
+  const [issues, setIssues] = useState<Issue[] | null>(null);
   const [numberOfPages, setNumberOfPages] = useState(1);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>();
@@ -35,15 +35,20 @@ const useGetIssues = () => {
       );
       setIssues(response.data);
 
-      const match = response.headers["link"].match(linkHeaderRx);
-      if (match && match.length > 1) {
-        setNumberOfPages(parseInt(match[1], 10));
-      } else {
-        setNumberOfPages(page);
+      // Parse the number of pages from the link header. It's not always there and it doesn't
+      // always include the rel="last" portion, so we'll default to the current page.
+      const linkHeader = response.headers["link"];
+      let parsedNumberOfPages = page;
+      if (linkHeader) {
+        const match = linkHeader.match(linkHeaderRx);
+        if (match && match.length > 1) {
+          parsedNumberOfPages = parseInt(match[1], 10);
+        }
       }
+      setNumberOfPages(parsedNumberOfPages);
     } catch (e) {
       if (e.response && e.response.data && e.response.data.message) {
-        setError(e.response.data.message);
+        setError(`Error: ${e.response.data.message}`);
       } else {
         setError("Encountered an error fetching the list of issues.");
       }
@@ -59,7 +64,10 @@ const useGetIssues = () => {
     numberOfPages,
     loading,
     error,
-    clear: () => setIssues([]),
+    clear: () => {
+      setIssues(null);
+      setError(null);
+    },
   };
 };
 

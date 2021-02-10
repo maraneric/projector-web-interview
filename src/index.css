@@ -29,6 +29,11 @@ input {
   color: #333;
 }
 
+/* 
+ Button styles for the entire app. We need to use the .button class when we want
+ a button to look like a button since we also need to support buttons that look
+ like links (pagination) 
+*/
 button.button {
   font-size: 18px;
   background-color: #3369ff;
@@ -54,4 +59,47 @@ button.error:hover {
 button.button:disabled {
   cursor: not-allowed;
   background-color: lightslategrey;
+}
+
+/* anchor styles */
+a,
+a:visited,
+a:active {
+  text-decoration: none;
+  color: #3369ff;
+}
+
+a:hover,
+a:active {
+  color: #3633ff;
+  text-decoration: underline;
+}
+
+/* Card is a common style used by the issue list and the issue card */
+.Card {
+  margin-bottom: 20px;
+  border: solid 1px #cbcbcb;
+  border-radius: 10px;
+  background-color: white;
+  box-shadow: 0 8px 6px -6px #cbcbcb;
+  background-clip: padding-box;
+  overflow: hidden;
+}
+
+/* description list styling for the issue details card */
+dl {
+  overflow: hidden;
+}
+dt,
+dd {
+  display: block;
+  float: left;
+  margin-top: 4px;
+}
+dt {
+  clear: both;
+  font-weight: 600;
+}
+dd {
+  margin-left: 8px;
 }

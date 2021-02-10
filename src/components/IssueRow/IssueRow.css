@@ -7,11 +7,11 @@
 }
 
 .IssueRow:not(:last-of-type) {
-  border-bottom: 1px solid grey;
+  border-bottom: 1px solid #cbcbcb;
 }
 
 .IssueRow:hover {
-  background-color: lightcyan;
+  background-color: #e7eeff;
 }
 
 .IssueRow-details {

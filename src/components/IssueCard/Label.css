@@ -1,0 +1,11 @@
+.Label {
+  border-radius: 4px;
+  display: inline-block;
+  font-size: 12px;
+  line-height: 20px;
+  padding: 0 8px;
+}
+
+.Label:not(:first-of-type) {
+  margin-left: 4px;
+}

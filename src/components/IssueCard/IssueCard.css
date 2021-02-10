@@ -1,0 +1,21 @@
+.IssueCard {
+  text-align: left;
+  padding: 20px;
+}
+
+.IssueCard-title {
+  margin: 0;
+  font-size: 20px;
+}
+
+.IssueCard-body {
+  white-space: pre-line;
+}
+
+.IssueCard-button-row {
+  text-align: right;
+}
+
+.IssueCard-button-row > :not(:last-child) {
+  margin-right: 16px;
+}

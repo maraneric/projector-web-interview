@@ -1,14 +1,17 @@
 import React, { useState } from "react";
-import "./IssueViewer.css";
 import useGetIssues from "./useGetIssues";
 import IssueRow from "../IssueRow";
 import Pagination from "../Pagination";
+import Issue from "../../types/Issue";
+import InputsRow from "./InputsRow";
+import IssueCard from "../IssueCard";
 
-function IssuesList() {
-  const pageSize = 5;
-  const [org, setOrg] = useState("github");
-  const [repo, setRepo] = useState("vscode-codeql");
+function IssueViewer() {
+  const pageSize = 20;
+  const [org, setOrg] = useState("");
+  const [repo, setRepo] = useState("");
   const [page, setPage] = useState(1);
+  const [selectedIssue, setSelectedIssue] = useState<Issue | null>(null);
   const {
     getIssues,
     issues,
@@ -18,66 +21,61 @@ function IssuesList() {
     numberOfPages,
   } = useGetIssues();
 
+  if (selectedIssue) {
+    return (
+      <IssueCard issue={selectedIssue} onClose={() => setSelectedIssue(null)} />
+    );
+  }
+
   return (
     <div className="IssueViewer">
-      <div className="IssueViewer-input-row">
-        <input
-          placeholder="org"
-          value={org}
-          onChange={(e) => setOrg(e.target.value)}
-          autoFocus={true}
-        />
-        <input
-          placeholder="repo"
-          value={repo}
-          onChange={(e) => setRepo(e.target.value)}
-        />
-        <div className="IssueViewer-buttons">
-          <button
-            className="button"
-            disabled={loading || !org || !repo}
-            onClick={() => getIssues({ org, repo, page, pageSize })}
-          >
-            Go
-          </button>
-          <button
-            className="button error"
-            onClick={() => {
-              clear();
-              setOrg("");
-              setRepo("");
-            }}
-          >
-            Clear
-          </button>
-        </div>
-      </div>
+      <InputsRow
+        org={org}
+        onOrgChanged={setOrg}
+        repo={repo}
+        onRepoChanged={setRepo}
+        onGo={() => getIssues({ org, repo, page, pageSize })}
+        onClear={() => {
+          clear();
+          setOrg("");
+          setRepo("");
+        }}
+        loading={loading}
+      />
 
       {error ? (
-        <div>{error}</div>
-      ) : issues.length ? (
-        <>
-          <div className="IssueViewer-list">
-            {issues.map((issue) => (
-              <IssueRow key={issue.id} issue={issue} />
-            ))}
-          </div>
-          <Pagination
-            currentPage={page}
-            numberOfPages={numberOfPages}
-            onSelectPage={(page) => {
-              setPage(page);
-              getIssues({ org, repo, page, pageSize });
-            }}
-          />
-        </>
+        <p>{error}</p>
+      ) : issues ? (
+        issues.length ? (
+          <>
+            <div className="Card">
+              {issues.map((issue) => (
+                <IssueRow
+                  key={issue.id}
+                  issue={issue}
+                  onSelect={() => setSelectedIssue(issue)}
+                />
+              ))}
+            </div>
+            <Pagination
+              currentPage={page}
+              numberOfPages={numberOfPages}
+              onSelectPage={(page) => {
+                setPage(page);
+                getIssues({ org, repo, page, pageSize });
+              }}
+            />
+          </>
+        ) : (
+          <p>No issues found in that repo. Try another one.</p>
+        )
       ) : (
-        <div>
+        <p>
           Enter the github org and repo name above to view the issues for that
           repository
-        </div>
+        </p>
       )}
     </div>
   );
 }
-export default IssuesList;
+export default IssueViewer;

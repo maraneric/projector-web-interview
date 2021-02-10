@@ -1,0 +1,21 @@
+.InputsRow {
+  display: flex;
+  margin-bottom: 20px;
+}
+.InputsRow input {
+  flex: 1 1 auto;
+}
+.InputsRow :not(:first-child) {
+  margin-left: 16px;
+}
+
+/* Stack the inputs on screens smaller than 600px */
+@media all and (max-width: 600px) {
+  .InputsRow {
+    flex-direction: column;
+  }
+  .InputsRow > :not(:first-child) {
+    margin-left: 0;
+    margin-top: 16px;
+  }
+}

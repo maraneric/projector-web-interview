@@ -8,7 +8,9 @@ function App() {
       <header>
         <h1>Github Issue Viewer</h1>
       </header>
-      <IssueViewer />
+      <div className="App-container">
+        <IssueViewer />
+      </div>
     </div>
   );
 }
